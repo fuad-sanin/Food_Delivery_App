@@ -2,7 +2,7 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:foodapp/screens/location/location_screen.dart';
+import 'package:foodapp/screens/get_started/start_screen.dart';
 import '../utils/helper.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => const LocationScreen()));
+          MaterialPageRoute(builder: (ctx) => const StartScreen()));
     });
   }
 

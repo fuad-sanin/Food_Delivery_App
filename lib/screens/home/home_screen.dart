@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
             body: Center(
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/location');
+                  Navigator.pushNamed(context, '/start');
                 },
                 child: Text(
                   'Location Screen',
