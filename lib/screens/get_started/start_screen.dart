@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../config/constants.dart';
+import '../../config/theme.dart';
 import '../../utils/helper.dart';
 
 class StartScreen extends StatelessWidget {
@@ -21,7 +23,7 @@ class StartScreen extends StatelessWidget {
         alignment: Alignment.topCenter,
         children: [
           Container(
-            margin: EdgeInsets.only(
+            margin: const EdgeInsets.only(
               bottom: 210,
             ),
             height: double.infinity,
@@ -34,16 +36,106 @@ class StartScreen extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             // ignore: sized_box_for_whitespace
-            child: Container(
-              height: 260,
-              width: double.infinity,
-              child: const DecoratedBox(
-                decoration: BoxDecoration(color: Colors.red),
+            child: ClipPath(
+              clipper: CustomClip(),
+              child: SizedBox(
+                height: 300,
+                width: double.infinity,
+                // ignore: avoid_unnecessary_containers
+                child: Container(
+                  child: const DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black,
+                            blurRadius: 5.0,
+                            offset: Offset(5, 5))
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
+          Align(
+            alignment: const Alignment(0, 0.5),
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'The Fastest in \nDelivery ',
+                    style: AppTextStyle.boldSpace(),
+                  ),
+                  TextSpan(
+                    text: 'Food',
+                    style: AppTextStyle.boldSpaceRed(),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          htspace20,
+          Align(
+            alignment: const Alignment(0, 0.66),
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text:
+                        'Our job is filling your tummy\n with delicious food and delivery',
+                    style: AppTextStyle.regular16(),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Align(
+              alignment: const Alignment(0, 0.90),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/home');
+                },
+                style: ElevatedButton.styleFrom(
+                    shadowColor: AppColors.shadow,
+                    elevation: 10,
+                    fixedSize: const Size(160, 50),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50))),
+                child: const Text(
+                  'Get Started',
+                  style: TextStyle(
+                    fontSize: 17,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+              ))
         ],
       ),
     );
+  }
+}
+
+// TextSpan
+class CustomClip extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.moveTo(0, size.height * 0.1951800);
+    path.quadraticBezierTo(size.width * 0.1920500, size.height * 0.0182600,
+        size.width * 0.5016750, size.height * 0.0149200);
+    path.quadraticBezierTo(size.width * 0.8108000, size.height * 0.0272600,
+        size.width, size.height * 0.2011800);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
   }
 }
